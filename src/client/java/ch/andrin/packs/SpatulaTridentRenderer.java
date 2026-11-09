@@ -30,7 +30,7 @@ public class SpatulaTridentRenderer extends EntityRenderer<ThrownTrident, Spatul
 
 	private final ThrownTridentRenderer vanilla;
 	private final ItemModelResolver itemModelResolver;
-	private final ItemStack stack = new ItemStack(Items.TRIDENT);
+	private ItemStack stack; // erst beim Rendern erzeugen (beim Start sind Items noch nicht bereit)
 
 	public SpatulaTridentRenderer(EntityRendererProvider.Context context) {
 		super(context);
@@ -55,6 +55,7 @@ public class SpatulaTridentRenderer extends EntityRenderer<ThrownTrident, Spatul
 		vanilla.extractRenderState(entity, state, partialTicks);
 		state.spatula = spatulaActive();
 		if (state.spatula) {
+			if (stack == null) stack = new ItemStack(Items.TRIDENT);
 			this.itemModelResolver.updateForNonLiving(state.item, stack, ItemDisplayContext.NONE, entity);
 		}
 	}
