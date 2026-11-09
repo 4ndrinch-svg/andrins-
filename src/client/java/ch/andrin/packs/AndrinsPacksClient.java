@@ -77,9 +77,8 @@ public class AndrinsPacksClient implements ClientModInitializer {
 					PackActivationType.NORMAL);
 		}
 
-		// Speicher: beim Start wiederherstellen, beim Beenden sichern
+		// Speicher: beim Start wiederherstellen (gespeichert wird beim Schliessen des Menüs)
 		ClientLifecycleEvents.CLIENT_STARTED.register(PackMemory::restore);
-		ClientLifecycleEvents.CLIENT_STOPPING.register(PackMemory::save);
 
 		EntityRendererRegistry.register(EntityTypes.TRIDENT, SpatulaTridentRenderer::new);
 
