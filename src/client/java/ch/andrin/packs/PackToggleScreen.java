@@ -114,7 +114,7 @@ public class PackToggleScreen extends Screen {
 			repo.setSelected(order);
 			this.minecraft.options.updateResourcePacks(repo);                     // speichert + lädt neu
 		}
-		this.minecraft.setScreen(parent);
+		this.minecraft.gui.setScreen(parent);
 	}
 
 	@Override

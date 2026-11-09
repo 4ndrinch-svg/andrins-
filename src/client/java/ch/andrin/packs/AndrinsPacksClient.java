@@ -10,7 +10,7 @@ import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 /**
  * Registriert alle Packs als einzeln schaltbare eingebaute Ressourcenpakete
@@ -74,12 +74,12 @@ public class AndrinsPacksClient implements ClientModInitializer {
 
 		KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
 		openMenuKey = KeyMappingHelper.registerKeyMapping(
-				new KeyMapping("key.andrinspacks.open_menu", GLFW.GLFW_KEY_K, category));
+				new KeyMapping("key.andrinspacks.open_menu", InputConstants.KEY_K, category));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (openMenuKey.consumeClick()) {
-				if (client.screen == null) {
-					client.setScreen(new PackToggleScreen(null));
+				if (client.gui.screen() == null) {
+					client.gui.setScreen(new PackToggleScreen(null));
 				}
 			}
 		});
