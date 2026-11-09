@@ -1,13 +1,11 @@
-#version 150
-/* 
-    WRP (World Resource Pack) shader for lightmap rendering
-    Fullbright UB
-*/
+#version 330
+#extension GL_ARB_separate_shader_objects : require
 
-in vec2 texCoord;
-out vec4 fragColor;
+// Fullbright für Minecraft 26.3 – alles voll hell
+layout(location = 0) in vec2 texCoord;
+
+layout(location = 0) out vec4 fragColor;
 
 void main() {
-    // 100% Fullbright
     fragColor = vec4(1.0);
 }

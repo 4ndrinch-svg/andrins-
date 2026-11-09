@@ -38,18 +38,3 @@ jobs:
           cd out && git init -q -b release && git add -A
           git -c user.name=ci -c user.email=ci@noreply commit -qm "jar ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" release
-      - name: dump minecraft info
-        if: always()
-        run: |
-          C=/home/runner/.gradle/caches/fabric-loom/26.3/minecraft-client.jar
-          mkdir dump && cd dump
-          unzip -q -o $C 'assets/minecraft/shaders/core/rendertype_lines*' 'assets/minecraft/shaders/core/lightmap*' 'assets/minecraft/shaders/include/*' 'assets/minecraft/items/*spear*' 'assets/minecraft/items/trident.json' 'assets/minecraft/models/item/*spear*' 'assets/minecraft/textures/item/*spear*' 'assets/minecraft/textures/entity/*spear*' 'assets/minecraft/textures/entity/trident*' 2>/dev/null || true
-          J=$(find /home/runner/.gradle/caches/fabric-loom -name "minecraft-clientonly-deobf-26.3.jar" | head -1)
-          for c in net.minecraft.client.gui.GuiGraphicsExtractor net.minecraft.client.gui.components.EditBox net.minecraft.client.gui.components.ObjectSelectionList 'net.minecraft.client.gui.components.ObjectSelectionList$Entry' net.minecraft.client.gui.components.AbstractSelectionList net.minecraft.client.gui.components.AbstractWidget net.minecraft.client.gui.screens.Screen net.minecraft.client.gui.components.events.ContainerEventHandler net.minecraft.client.renderer.RenderPipelines net.minecraft.client.input.MouseButtonEvent; do echo "### $c"; javap -cp "$J" "$c" > "$(echo $c | tr '$' '_').txt" 2>&1; done
-          javap -cp "$J" -p net.minecraft.client.gui.components.AbstractSelectionList > asl_private.txt
-          ls -R . | head -80
-      - name: upload dump to branch
-        if: always()
-        run: |
-          cd dump && git init -q -b dump && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm dump
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump
