@@ -35,7 +35,7 @@ jobs:
           echo "$J"
           for j in $J; do
             if unzip -l "$j" | grep -q "net/minecraft/client/Minecraft.class"; then
-              javap -cp "$j" net.minecraft.client.Minecraft | grep -iE "screen|gui" ; 
+              javap -cp "$j" net.minecraft.client.gui.Gui | grep -iE "screen" ; javap -cp "$j" net.minecraft.client.gui.screens.Screen | grep -iE "minecraft|onClose|rebuild|setScreen" ; 
               javap -cp "$j" com.mojang.blaze3d.platform.InputConstants | grep -E "KEY_K|Type" ;
               javap -cp "$j" net.minecraft.client.KeyMapping | grep -E "KeyMapping\(" ; break
             fi
