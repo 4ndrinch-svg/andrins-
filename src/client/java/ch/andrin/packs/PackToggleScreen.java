@@ -213,6 +213,7 @@ public class PackToggleScreen extends Screen {
 			repo.setSelected(order);
 			this.minecraft.options.updateResourcePacks(repo);
 		}
+		PackMemory.save(this.minecraft);
 		this.minecraft.gui.setScreen(parent);
 	}
 

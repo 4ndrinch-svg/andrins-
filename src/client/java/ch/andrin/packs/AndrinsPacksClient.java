@@ -1,6 +1,7 @@
 package ch.andrin.packs;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -75,6 +76,10 @@ public class AndrinsPacksClient implements ClientModInitializer {
 					Component.literal("§d[Andrin] §f" + p[1]),
 					PackActivationType.NORMAL);
 		}
+
+		// Speicher: beim Start wiederherstellen, beim Beenden sichern
+		ClientLifecycleEvents.CLIENT_STARTED.register(PackMemory::restore);
+		ClientLifecycleEvents.CLIENT_STOPPING.register(PackMemory::save);
 
 		EntityRendererRegistry.register(EntityTypes.TRIDENT, SpatulaTridentRenderer::new);
 
