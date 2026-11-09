@@ -38,17 +38,8 @@ jobs:
           cd out && git init -q -b release && git add -A
           git -c user.name=ci -c user.email=ci@noreply commit -qm "jar ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" release
-      - name: dump sources
+      - name: clear dump branch
         if: always()
         run: |
-          ./gradlew genSources -q || true
-          mkdir -p dump && cd dump
-          SJ=$(find ~/.gradle ../.gradle -name "*sources*.jar" -path "*minecraft*" | grep -i client | head -3); echo "$SJ"
-          for j in $SJ; do unzip -q -o "$j" 'net/minecraft/client/renderer/entity/ThrownItemRenderer.java' 'net/minecraft/client/renderer/entity/ThrownTridentRenderer.java' 'net/minecraft/client/renderer/entity/state/ThrownTridentRenderState.java' 'net/minecraft/client/renderer/entity/state/ThrownItemRenderState.java' 'net/minecraft/client/renderer/entity/EntityRenderer.java' 'net/minecraft/client/renderer/entity/EntityRendererProvider.java' 2>/dev/null || true; done
-          FJ=$(find ~/.gradle -name "fabric-rendering-v1*.jar" | head -1); unzip -l "$FJ" | grep -i EntityRenderer > fabric_rendering.txt
-          find . -type f | head
-      - name: upload dump
-        if: always()
-        run: |
-          cd dump && git init -q -b dump && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm dump
+          mkdir empty && cd empty && git init -q -b dump && echo "leer" > README.md && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm "leer"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump

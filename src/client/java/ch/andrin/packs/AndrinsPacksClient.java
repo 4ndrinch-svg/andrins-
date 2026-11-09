@@ -3,6 +3,8 @@ package ch.andrin.packs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.world.entity.EntityType;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -41,7 +43,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 			{"fullbright", "Fullbright", "Welt"},
 			{"low_fire_extreme", "Low Fire EXTREME", "Kampf"},
 			{"low_shield", "Low Shield", "Kampf"},
-			{"anti_leak_netherite", "Anti-Leak Netherite (Stein, Deepslate, Bedrock, Erze)", "Streamer"},
+			{"anti_leak_netherite", "Anti-Leak Zufall (Stein, Erze, Bedrock = zufällige Blöcke)", "Streamer"},
 			{"new_glowing_ores", "New Glowing Ores", "Welt"},
 			{"no_totem_pop_particles", "No Totem Pop Particles", "Kampf"},
 			{"purplepearls", "PurplePearls", "Lila"},
@@ -56,7 +58,6 @@ public class AndrinsPacksClient implements ClientModInitializer {
 			{"purple_sweep_attack", "purple sweep attack", "Lila"},
 			{"tiny_trident", "tiny trident", "Kampf"},
 			{"spatula_trident", "Spatula (Dreizack als Pfannenwender)", "Spass"},
-			{"fork_spears", "Gabeln (Speere werden zu Gabeln)", "Spass"},
 			{"waystones", "Waystones", "Welt"},
 	};
 
@@ -74,6 +75,8 @@ public class AndrinsPacksClient implements ClientModInitializer {
 					Component.literal("§d[Andrin] §f" + p[1]),
 					PackActivationType.NORMAL);
 		}
+
+		EntityRendererRegistry.register(EntityType.TRIDENT, SpatulaTridentRenderer::new);
 
 		KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
 		openMenuKey = KeyMappingHelper.registerKeyMapping(
