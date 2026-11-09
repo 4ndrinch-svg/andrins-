@@ -50,8 +50,23 @@ jobs:
           else
             gh release create "v$V" "$JAR" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
           fi
-      - name: clear dump branch
+      - name: dump sources
         if: always()
+        run: |
+          ./gradlew genSources -q || true
+          mkdir -p dump && cd dump
+          for j in $(find ~/.gradle ../.gradle -name "*sources*.jar" -path "*minecraft*" | grep -i client | head -3); do
+            unzip -q -o "$j" 'net/minecraft/client/renderer/SubmitNodeCollector.java' 'net/minecraft/client/renderer/OrderedSubmitNodeCollector.java' 'net/minecraft/client/renderer/special/SpecialModelRenderer.java' 'net/minecraft/client/renderer/special/SpecialModelRenderers.java' 'net/minecraft/client/renderer/special/TridentSpecialRenderer.java' 'net/minecraft/client/renderer/special/NoDataSpecialModelRenderer.java' 'net/minecraft/client/renderer/rendertype/RenderTypes.java' 'com/mojang/blaze3d/vertex/VertexConsumer.java' 2>/dev/null || true
+          done
+          for j in $(find ~/.gradle -name "fabric-rendering-v1*.jar" | head -1); do unzip -l "$j" | grep -iE "special" > fabric_special.txt; done
+          find . -type f
+      - name: upload dump
+        if: always()
+        run: |
+          cd dump && git init -q -b dump && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm dump
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump
+      - name: clear dump branch
+        if: false
         run: |
           mkdir empty && cd empty && git init -q -b dump && echo "leer" > README.md && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm "leer"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump
