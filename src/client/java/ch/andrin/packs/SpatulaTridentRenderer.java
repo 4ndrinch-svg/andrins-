@@ -8,14 +8,9 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.entity.state.ThrownTridentRenderState;
-import net.minecraft.client.renderer.item.ItemModelResolver;
-import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 
 /**
@@ -24,18 +19,14 @@ import net.minecraft.world.phys.AABB;
  */
 public class SpatulaTridentRenderer extends EntityRenderer<ThrownTrident, SpatulaTridentRenderer.State> {
 	public static class State extends ThrownTridentRenderState {
-		public final ItemStackRenderState item = new ItemStackRenderState();
 		public boolean spatula;
 	}
 
 	private final ThrownTridentRenderer vanilla;
-	private final ItemModelResolver itemModelResolver;
-	private ItemStack stack; // erst beim Rendern erzeugen (beim Start sind Items noch nicht bereit)
 
 	public SpatulaTridentRenderer(EntityRendererProvider.Context context) {
 		super(context);
 		this.vanilla = new ThrownTridentRenderer(context);
-		this.itemModelResolver = context.getItemModelResolver();
 	}
 
 	private static boolean spatulaActive() {
@@ -54,10 +45,6 @@ public class SpatulaTridentRenderer extends EntityRenderer<ThrownTrident, Spatul
 	public void extractRenderState(ThrownTrident entity, State state, float partialTicks) {
 		vanilla.extractRenderState(entity, state, partialTicks);
 		state.spatula = spatulaActive();
-		if (state.spatula) {
-			if (stack == null) stack = new ItemStack(Items.TRIDENT);
-			this.itemModelResolver.updateForNonLiving(state.item, stack, ItemDisplayContext.NONE, entity);
-		}
 	}
 
 	@Override
@@ -71,7 +58,8 @@ public class SpatulaTridentRenderer extends EntityRenderer<ThrownTrident, Spatul
 		poseStack.rotateDegrees(Axis.ZP, state.xRot - 90.0F);   // Blatt zeigt in Flugrichtung
 		poseStack.scale(1.6F, 1.6F, 1.6F);
 		poseStack.translate(0.0F, 0.25F, 0.0F);
-		state.item.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
+		poseStack.translate(-0.5F, -0.5F, -0.5F);
+		SpatulaMesh.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY);
 		poseStack.popPose();
 		super.submit(state, poseStack, collector, camera);
 	}

@@ -3,12 +3,18 @@
   "type": "minecraft:condition",
   "property": "minecraft:using_item",
   "on_true": {
-   "type": "minecraft:model",
-   "model": "minecraft:item/spatula_throwing"
+   "type": "minecraft:special",
+   "base": "minecraft:item/spatula_throwing",
+   "model": {
+    "type": "andrinspacks:spatula"
+   }
   },
   "on_false": {
-   "type": "minecraft:model",
-   "model": "minecraft:item/spatula"
+   "type": "minecraft:special",
+   "base": "minecraft:item/spatula",
+   "model": {
+    "type": "andrinspacks:spatula"
+   }
   }
  }
 }

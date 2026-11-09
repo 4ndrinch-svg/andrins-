@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.renderer.special.SpecialModelRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -80,6 +81,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 		// Speicher: beim Start wiederherstellen (gespeichert wird beim Schliessen des Menüs)
 		ClientLifecycleEvents.CLIENT_STARTED.register(PackMemory::restore);
 
+		SpecialModelRenderers.ID_MAPPER.put(Identifier.fromNamespaceAndPath(MOD_ID, "spatula"), SpatulaSpecialRenderer.Unbaked.MAP_CODEC);
 		EntityRendererRegistry.register(EntityTypes.TRIDENT, SpatulaTridentRenderer::new);
 
 		KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
