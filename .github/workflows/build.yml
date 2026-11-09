@@ -38,6 +38,11 @@ jobs:
           cd out && git init -q -b release && git add -A
           git -c user.name=ci -c user.email=ci@noreply commit -qm "jar ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" release
+      - name: find trident type
+        if: always()
+        run: |
+          J=$(find ~/.gradle -name "minecraft-common-deobf-26.3.jar" | head -1)
+          for c in net.minecraft.world.entity.EntityType net.minecraft.world.entity.EntityTypes; do javap -cp "$J" $c 2>&1 | grep -iE "trident|class|not found" ; done
       - name: clear dump branch
         if: always()
         run: |
