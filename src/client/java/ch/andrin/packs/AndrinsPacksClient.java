@@ -59,7 +59,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 			{"waystones", "Waystones"},
 	};
 
-	private static KeyMapping openMenuKey;
+	public static KeyMapping openMenuKey;
 
 	@Override
 	public void onInitializeClient() {

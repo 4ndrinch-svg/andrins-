@@ -7,6 +7,7 @@ import java.util.Set;
 
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -59,6 +60,12 @@ public class PackToggleScreen extends Screen {
 				.bounds(this.width / 2 - 100, 6, 200, BTN_H).build();
 		title.active = false;
 		this.addRenderableWidget(title);
+
+		// Taste ändern: öffnet die Minecraft-Tastenbelegung
+		this.addRenderableWidget(Button.builder(
+				Component.literal("§eTaste: §f").append(AndrinsPacksClient.openMenuKey.getTranslatedKeyMessage()).append(Component.literal(" §7(ändern)")),
+				b -> this.minecraft.gui.setScreen(new KeyBindsScreen(this, this.minecraft.options)))
+				.bounds(this.width - 150, 6, 145, BTN_H).build());
 
 		int start = page * PER_PAGE;
 		for (int i = start; i < Math.min(start + PER_PAGE, AndrinsPacksClient.PACKS.length); i++) {
