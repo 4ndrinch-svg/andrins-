@@ -4,7 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -76,7 +76,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 					PackActivationType.NORMAL);
 		}
 
-		EntityRendererRegistry.register(EntityType.TRIDENT, SpatulaTridentRenderer::new);
+		EntityRendererRegistry.register(EntityTypes.TRIDENT, SpatulaTridentRenderer::new);
 
 		KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
 		openMenuKey = KeyMappingHelper.registerKeyMapping(
