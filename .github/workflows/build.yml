@@ -6,6 +6,9 @@
 name: build
 on: [pull_request, push]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -28,3 +31,10 @@ jobs:
         with:
           name: AndrinsPacks-jar
           path: build/libs/
+      - name: publish jar to release branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir out && cp build/libs/andrins-packs-*.jar out/ && rm -f out/*-sources.jar
+          cd out && git init -q -b release && git add -A
+          git -c user.name=ci -c user.email=ci@noreply commit -qm "jar ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" release
