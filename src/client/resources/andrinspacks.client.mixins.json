@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "ch.andrin.packs.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"MinecraftGlowMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

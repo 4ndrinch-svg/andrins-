@@ -66,6 +66,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 	public static final String[] CATEGORIES = {"Alle", "Kampf", "Welt", "Lila", "Redstone", "HUD", "Streamer", "Spass"};
 
 	public static KeyMapping openMenuKey;
+	public static KeyMapping trollKey;
 
 	@Override
 	public void onInitializeClient() {
@@ -88,7 +89,16 @@ public class AndrinsPacksClient implements ClientModInitializer {
 		openMenuKey = KeyMappingHelper.registerKeyMapping(
 				new KeyMapping("key.andrinspacks.open_menu", InputConstants.KEY_K, category));
 
+		trollKey = KeyMappingHelper.registerKeyMapping(
+				new KeyMapping("key.andrinspacks.troll_vision", InputConstants.KEY_G, category));
+
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			while (trollKey.consumeClick()) {
+				TrollVision.enabled = !TrollVision.enabled;
+				if (client.player != null) {
+					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler-Sicht §aAN" : "§dSpieler-Sicht §cAUS"));
+				}
+			}
 			while (openMenuKey.consumeClick()) {
 				if (client.gui.screen() == null) {
 					client.gui.setScreen(new PackToggleScreen(null));
