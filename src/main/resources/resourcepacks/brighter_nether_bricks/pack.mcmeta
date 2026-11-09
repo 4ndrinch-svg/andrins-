@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "Brighter nether bricks for better visibility in fortress",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

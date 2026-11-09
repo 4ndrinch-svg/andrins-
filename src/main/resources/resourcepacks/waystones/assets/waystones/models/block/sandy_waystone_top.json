@@ -1,0 +1,48 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "waystones:block/waystone_top",
+	"textures": {
+		"1": "waystones:block/chiseled_sandstone_waystone_top",
+		"2": "waystones:block/chiseled_sandstone_waystone_top_bottom",
+		"3": "waystones:block/chiseled_sandstone_waystone_top_top",
+		"particle": "waystones:block/chiseled_sandstone_waystone_top",
+		"texture": "waystones:block/chiseled_sandstone_waystone"
+	},
+	"elements": [
+		{
+			"name": "pillarTop",
+			"from": [3, 0, 3],
+			"to": [13, 8, 13],
+			"faces": {
+				"north": {"uv": [3, 8, 13, 16], "texture": "#1"},
+				"east": {"uv": [3, 8, 13, 16], "texture": "#1"},
+				"south": {"uv": [3, 8, 13, 16], "texture": "#1"},
+				"west": {"uv": [3, 8, 13, 16], "texture": "#1"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#texture"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "pillarTop",
+			"from": [1, 8, 1],
+			"to": [15, 16, 15],
+			"faces": {
+				"north": {"uv": [1, 0, 15, 8], "texture": "#1"},
+				"east": {"uv": [1, 0, 15, 8], "texture": "#1"},
+				"south": {"uv": [1, 0, 15, 8], "texture": "#1"},
+				"west": {"uv": [1, 0, 15, 8], "texture": "#1"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#3"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "top",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

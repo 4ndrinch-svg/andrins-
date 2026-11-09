@@ -1,0 +1,4 @@
+{
+  "condition": "!outlines.powder",
+  "fallback": "assets/minecraft/blockstates/disabled_features/pink_concrete_powder.json"
+}

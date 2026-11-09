@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "§e• Version 3.1.0\n§6• by Oculie",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

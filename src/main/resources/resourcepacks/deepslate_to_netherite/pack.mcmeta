@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "Changes Deepslate and other negative Y level blocks to look like Netherite Blocks",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

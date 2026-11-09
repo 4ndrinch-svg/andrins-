@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "BY Erez43",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

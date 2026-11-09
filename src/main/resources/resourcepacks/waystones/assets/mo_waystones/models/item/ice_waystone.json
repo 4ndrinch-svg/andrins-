@@ -1,0 +1,6 @@
+{
+  "parent": "mo_waystones:item/waystone",
+  "textures": {
+    "texture": "mo_waystones:block/ice_waystone"
+  }
+}

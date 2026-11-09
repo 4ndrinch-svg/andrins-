@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "minecraft:block/wool/magenta_wool",
+    "side": "minecraft:block/wool/magenta_wool",
+    "top": "minecraft:block/wool/magenta_wool"
+  }
+}
+

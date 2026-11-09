@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "distance=1": {
+      "model": "minecraft:block/leaves/orange_poplar/1"
+    },
+    "distance=2": {
+      "model": "minecraft:block/leaves/orange_poplar/2"
+    },
+    "distance=3": {
+      "model": "minecraft:block/leaves/orange_poplar/3"
+    },
+    "distance=4": {
+      "model": "minecraft:block/leaves/orange_poplar/4"
+    },
+    "distance=5": {
+      "model": "minecraft:block/leaves/orange_poplar/5"
+    },
+    "distance=6": {
+      "model": "minecraft:block/leaves/orange_poplar/6"
+    },
+    "distance=7": {
+      "model": "minecraft:block/leaves/orange_poplar/7"
+    }
+  }
+}

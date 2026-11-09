@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:lodestone_tracker",
+    "on_true": {
+      "type": "minecraft:select",
+      "property": "minecraft:display_context",
+      "cases": [
+        {
+          "when": [
+            "firstperson_lefthand",
+            "firstperson_righthand"
+          ],
+          "model": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/fp/e_mirror"
+          }
+        },
+        {
+          "when": [
+            "gui"
+          ],
+          "model": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/mirror"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "enderscape:item/tp/e_mirror"
+      }
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "enderscape:item/mirror"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "pack": {
+    "description": "§d§lEnchantment Outlines\n§7V1.10.8 | By Tixul",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  },
+  "overlays": {
+    "entries": [
+      {
+        "directory": "1-21-1",
+        "formats": {
+          "min_inclusive": 33,
+          "max_inclusive": 41
+        },
+        "min_format": 33,
+        "max_format": 41
+      },
+      {
+        "directory": "1-21-5",
+        "formats": {
+          "min_inclusive": 46,
+          "max_inclusive": 55
+        },
+        "min_format": 46,
+        "max_format": 55
+      },
+      {
+        "directory": "1-21-6",
+        "formats": {
+          "min_inclusive": 56,
+          "max_inclusive": 65
+        },
+        "min_format": 56,
+        "max_format": 65
+      },
+      {
+        "directory": "1-21-9",
+        "formats": {
+          "min_inclusive": 65,
+          "max_inclusive": 75
+        },
+        "min_format": 65,
+        "max_format": 75
+      },
+      {
+        "directory": "26-1",
+        "formats": {
+          "min_inclusive": 84,
+          "max_inclusive": 96
+        },
+        "min_format": 84,
+        "max_format": 96
+      },
+      {
+        "directory": "26-3",
+        "formats": {
+          "min_inclusive": 97,
+          "max_inclusive": 128
+        },
+        "min_format": 97,
+        "max_format": 128
+      }
+    ]
+  }
+}

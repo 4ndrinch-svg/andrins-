@@ -1,0 +1,4 @@
+{
+  "condition": "!outlines.powder",
+  "fallback": "assets/minecraft/items/disabled_features/brown_concrete_powder.json"
+}

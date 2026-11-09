@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "persistent=false": {
+      "model": "minecraft:block/leaves/red_poplar/not_persistent"
+    },
+    "distance=1,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/1"
+    },
+    "distance=2,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/2"
+    },
+    "distance=3,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/3"
+    },
+    "distance=4,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/4"
+    },
+    "distance=5,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/5"
+    },
+    "distance=6,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/6"
+    },
+    "distance=7,persistent=true": {
+      "model": "minecraft:block/leaves/red_poplar/7"
+    }
+  }
+}

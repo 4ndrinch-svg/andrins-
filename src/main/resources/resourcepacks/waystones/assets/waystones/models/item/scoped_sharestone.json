@@ -1,0 +1,9 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "item/handheld",
+	"textures": {
+		"layer1": "waystones:item/waystone/andesite_waystone",
+		"layer0": "waystones:item/waystone/runes"
+	}
+}

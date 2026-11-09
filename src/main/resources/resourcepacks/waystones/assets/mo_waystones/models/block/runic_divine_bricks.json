@@ -1,0 +1,7 @@
+{
+  "parent": "mo_waystones:block/15cube_all",
+  "textures": {
+    "all": "mo_waystones:block/runic_divine_bricks",
+    "emissive": "mo_waystones:block/runic_divine_bricks_emissive"
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:banner_patterns",
+    "ignore_default": true,
+    "on_true": {
+      "type": "minecraft:condition",
+      "property": "minecraft:has_component",
+      "component": "minecraft:enchantments",
+      "ignore_default": true,
+      "on_true": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": "gui",
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/shield_icon"
+            }
+          },
+          {
+            "when": [
+              "firstperson_lefthand",
+              "firstperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:condition",
+              "property": "minecraft:using_item",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "item/firstperson/e_shield_blocking"
+              },
+              "on_false": {
+                "type": "minecraft:model",
+                "model": "item/firstperson/e_shield"
+              }
+            }
+          },
+          {
+            "when": [
+              "thirdperson_lefthand",
+              "thirdperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:condition",
+              "property": "minecraft:using_item",
+              "on_true": {
+                "type": "minecraft:composite",
+                "models": [
+                  {
+                    "type": "minecraft:model",
+                    "model": "item/thirdperson/e_shield_banner_blocking"
+                  },
+                  {
+                    "type": "minecraft:special",
+                    "model": {
+                      "type": "minecraft:shield"
+                    },
+                    "base": "minecraft:item/shield_blocking",
+                    "transformation": {
+                      "translation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "left_rotation": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "right_rotation": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "scale": [
+                        1,
+                        -1,
+                        -1
+                      ]
+                    }
+                  }
+                ]
+              },
+              "on_false": {
+                "type": "minecraft:composite",
+                "models": [
+                  {
+                    "type": "minecraft:model",
+                    "model": "item/thirdperson/e_shield_banner"
+                  },
+                  {
+                    "type": "minecraft:special",
+                    "model": {
+                      "type": "minecraft:shield"
+                    },
+                    "base": "minecraft:item/shield",
+                    "transformation": {
+                      "translation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "left_rotation": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "right_rotation": [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "scale": [
+                        1,
+                        -1,
+                        -1
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "item/shield_icon_dropped"
+        }
+      },
+      "on_false": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "on_shelf",
+              "ground",
+              "fixed",
+              "gui"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/shield_icon"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:condition",
+          "property": "minecraft:using_item",
+          "on_true": {
+            "type": "minecraft:special",
+            "model": {
+              "type": "minecraft:shield"
+            },
+            "base": "minecraft:item/shield_blocking"
+          },
+          "on_false": {
+            "type": "minecraft:special",
+            "model": {
+              "type": "minecraft:shield"
+            },
+            "base": "minecraft:item/shield"
+          },
+          "transformation": {
+            "left_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "right_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              -1,
+              -1
+            ],
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:has_component",
+      "component": "minecraft:enchantments",
+      "ignore_default": true,
+      "on_true": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": "gui",
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/shield_icon"
+            }
+          },
+          {
+            "when": [
+              "firstperson_lefthand",
+              "firstperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:condition",
+              "property": "minecraft:using_item",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "item/firstperson/e_shield_blocking"
+              },
+              "on_false": {
+                "type": "minecraft:model",
+                "model": "item/firstperson/e_shield"
+              }
+            }
+          },
+          {
+            "when": [
+              "thirdperson_lefthand",
+              "thirdperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:condition",
+              "property": "minecraft:using_item",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "item/thirdperson/e_shield_blocking"
+              },
+              "on_false": {
+                "type": "minecraft:model",
+                "model": "item/thirdperson/e_shield"
+              }
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "item/shield_icon_dropped"
+        }
+      },
+      "on_false": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "on_shelf",
+              "ground",
+              "fixed",
+              "gui"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/shield_icon"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:condition",
+          "property": "minecraft:using_item",
+          "on_true": {
+            "type": "minecraft:special",
+            "model": {
+              "type": "minecraft:shield"
+            },
+            "base": "minecraft:item/shield_blocking",
+            "transformation": {
+              "translation": [
+                0,
+                0,
+                0
+              ],
+              "left_rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "right_rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                -1,
+                -1
+              ]
+            }
+          },
+          "on_false": {
+            "type": "minecraft:special",
+            "model": {
+              "type": "minecraft:shield"
+            },
+            "base": "minecraft:item/shield",
+            "transformation": {
+              "translation": [
+                0,
+                0,
+                0
+              ],
+              "left_rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "right_rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                -1,
+                -1
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "andrinspacks",
+  "version": "${version}",
+  "name": "Andrins Packs",
+  "description": "35 Ressourcenpakete in einer Mod - einzeln schaltbar unter Optionen > Ressourcenpakete.",
+  "authors": [
+    "Andrin Kull"
+  ],
+  "license": "Packs: jeweilige Autoren (nur privat)",
+  "icon": "assets/andrinspacks/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ch.andrin.packs.AndrinsPacksClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

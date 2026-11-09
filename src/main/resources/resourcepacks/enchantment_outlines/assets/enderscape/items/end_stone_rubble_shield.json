@@ -1,0 +1,67 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "fixed",
+          "ground",
+          "gui"
+        ],
+        "model": {
+          "type": "minecraft:model",
+          "model": "enderscape:item/end_stone_rubble_shield"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "property": "minecraft:has_component",
+      "component": "minecraft:enchantments",
+      "ignore_default": true,
+      "on_true": {
+        "property": "minecraft:using_item",
+        "type": "minecraft:condition",
+        "on_false": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "enderscape:item/rubble_shield_outline"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "enderscape:item/end_stone_rubble_shield"
+            }
+          ]
+        },
+        "on_true": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "enderscape:item/rubble_shield_using_outline"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "enderscape:item/end_stone_rubble_shield_using"
+            }
+          ]
+        }
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:using_item",
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "enderscape:item/end_stone_rubble_shield"
+        },
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "enderscape:item/end_stone_rubble_shield_using"
+        }
+      }
+    }
+  }
+}

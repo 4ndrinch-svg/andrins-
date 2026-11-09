@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "minecraft:block/wool/orange_wool",
+    "side": "minecraft:block/wool/orange_wool",
+    "top": "minecraft:block/wool/orange_wool"
+  }
+}
+

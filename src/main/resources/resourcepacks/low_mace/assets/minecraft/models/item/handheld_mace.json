@@ -1,0 +1,27 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"0": "item/mace",
+		"particle": "item/mace"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 55],
+			"translation": [0, 4, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, -55],
+			"translation": [0, 4, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [-1, 2.75, 3],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -25],
+			"translation": [-1, 2.75, 3],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

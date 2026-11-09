@@ -1,0 +1,23 @@
+{
+  "pack": {
+    "description": [
+      {
+        "text": "Purple Netherite",
+        "color": "gold",
+        "bold": true
+      },
+      {
+        "text": " By Ecsko",
+        "color": "aqua",
+        "bold": false
+      }
+    ],
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

@@ -1,0 +1,103 @@
+{
+    "textures": {
+        "particle": "block/polished_andesite",
+        "texture": "waystones:block/andesite_waystone",
+        "emissive": "waystones:block/andesite_waystone_emissive"
+    },
+    "elements": [
+        {   "name": "baseBottom",
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 3, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 4, 8 ], "texture": "#texture", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 4, 8 ], "texture": "#texture" },
+                "north": { "uv": [ 0, 8, 4, 9.5 ], "texture": "#texture", "cullface": "north" },
+                "south": { "uv": [ 0, 8, 4, 9.5 ], "texture": "#texture", "cullface": "south" },
+                "west":  { "uv": [ 0, 8, 4, 9.5 ], "texture": "#texture", "cullface": "west" },
+                "east":  { "uv": [ 0, 8, 4, 9.5 ], "texture": "#texture", "cullface": "east" }
+            }
+        },
+        {   "name": "baseMiddle",
+            "from": [ 1, 3, 1 ],
+            "to": [ 15, 7, 15 ],
+            "faces": {
+                "up":    { "uv": [ 4, 0, 7.5, 7 ], "texture": "#texture" },
+                "south": { "uv": [ 4, 7, 7.5, 9 ], "texture": "#texture" },
+                "north": { "uv": [ 4, 7, 7.5, 9 ], "texture": "#texture" },
+                "west":  { "uv": [ 4, 7, 7.5, 9 ], "texture": "#texture" },
+                "east":  { "uv": [ 4, 7, 7.5, 9 ], "texture": "#texture" }
+            }
+        },
+        {   "name": "baseTop",
+            "from": [ 2, 7, 2 ],
+            "to": [ 14, 9, 14 ],
+            "faces": {
+                "up":    { "uv": [ 7.5, 0, 10.5, 6 ], "texture": "#texture" },
+                "north": { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#texture" },
+                "south": { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#texture" },
+                "west":  { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#texture" },
+                "east":  { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#texture" }
+            }
+        },
+        {   "name": "pillarBottom",
+            "from": [ 3, 9, 3 ],
+            "to": [ 13, 16, 13 ],
+            "faces": {
+                "north": { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#texture" },
+                "south": { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#texture" },
+                "west":  { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#texture" },
+                "east":  { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#texture" }
+            }
+        },
+        {   "name": "baseBottom_emissive",
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 3, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 4, 8 ], "texture": "#emissive", "cullface": "down", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "up":    { "uv": [ 0, 0, 4, 8 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "north": { "uv": [ 0, 8, 4, 9.5 ], "texture": "#emissive", "cullface": "north", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "south": { "uv": [ 0, 8, 4, 9.5 ], "texture": "#emissive", "cullface": "south", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "west":  { "uv": [ 0, 8, 4, 9.5 ], "texture": "#emissive", "cullface": "west", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "east":  { "uv": [ 0, 8, 4, 9.5 ], "texture": "#emissive", "cullface": "east", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } }
+            }
+        },
+        {   "name": "baseMiddle_emissive",
+            "from": [ 1, 3, 1 ],
+            "to": [ 15, 7, 15 ],
+            "faces": {
+                "up":    { "uv": [ 4, 0, 7.5, 7 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "south": { "uv": [ 4, 7, 7.5, 9 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "north": { "uv": [ 4, 7, 7.5, 9 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "west":  { "uv": [ 4, 7, 7.5, 9 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "east":  { "uv": [ 4, 7, 7.5, 9 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } }
+            }
+        },
+        {   "name": "baseTop_emissive",
+            "from": [ 2, 7, 2 ],
+            "to": [ 14, 9, 14 ],
+            "faces": {
+                "up":    { "uv": [ 7.5, 0, 10.5, 6 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "north": { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } } ,
+                "south": { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "west":  { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "east":  { "uv": [ 7.5, 6, 10.5, 7 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } }
+            }
+        },
+        {   "name": "pillarBottom_emissive",
+            "from": [ 3, 9, 3 ],
+            "to": [ 13, 16, 13 ],
+            "faces": {
+                "north": { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "south": { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "west":  { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } },
+                "east":  { "uv": [ 10.5, 10, 13, 13.5 ], "texture": "#emissive", "neoforge_data": { "block_light": 15, "ambient_occlusion": false } }
+            }
+        }
+    ],
+    "groups": [
+        {   "name": "bottom",
+            "origin": [8, 8, 8],
+            "children": [0, 1, 2, 3, 4, 5, 6, 7]
+        }
+    ]
+}

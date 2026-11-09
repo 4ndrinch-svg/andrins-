@@ -1,0 +1,16 @@
+{
+  "pack": {
+    "description": "§3Blue Netherite \n         §8[1.21.2+]",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  },
+  "credits": {
+    "ThatCuteOne": "I made the pack",
+    "Ewan Howell": "Got emissve textures template from"
+  }
+}

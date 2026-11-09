@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "§5Simple Animated Purple XP Bar§f - x3non",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

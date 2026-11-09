@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "minecraft:block/concrete/brown_concrete",
+    "side": "minecraft:block/concrete/brown_concrete",
+    "top": "minecraft:block/concrete/brown_concrete"
+  }
+}
+

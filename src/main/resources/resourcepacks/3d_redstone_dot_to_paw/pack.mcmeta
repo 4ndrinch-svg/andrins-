@@ -1,0 +1,33 @@
+{
+  "pack": {
+    "description": [
+      {
+        "text": ""
+      },
+      {
+        "text": "Makes Wires connected in 3D\n"
+      },
+      {
+        "text": "By "
+      },
+      {
+        "text": "GNanimates",
+        "color": "#58c34e"
+      },
+      {
+        "text": " & "
+      },
+      {
+        "text": "Auriafoxgirl",
+        "color": "#ff7dbe"
+      }
+    ],
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

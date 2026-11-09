@@ -1,0 +1,7 @@
+{
+  "parent": "mo_waystones:block/15cube_all",
+  "textures": {
+    "all": "mo_waystones:block/unstable_divine_stone",
+    "emissive": "mo_waystones:block/unstable_divine_stone_emissive"
+  }
+}

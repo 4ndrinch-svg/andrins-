@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "§7v2.5.6 §8• §7by §cRexxStone\n§7with RPO settings by §bKikuGie",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}

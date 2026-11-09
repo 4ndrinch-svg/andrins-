@@ -1,0 +1,78 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:enchantments",
+    "ignore_default": true,
+    "on_true": {
+      "type": "minecraft:condition",
+      "property": "enderscape:enabled",
+      "on_true": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": "gui",
+            "model": {
+              "type": "minecraft:model",
+              "model": "enderscape:item/magnia_attractor_active"
+            }
+          },
+          {
+            "when": [
+              "firstperson_lefthand",
+              "firstperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "enderscape:item/fp/e_magnia_attractor_active"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "enderscape:item/tp/e_magnia_attractor_active"
+        }
+      },
+      "on_false": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": "gui",
+            "model": {
+              "type": "minecraft:model",
+              "model": "enderscape:item/magnia_attractor"
+            }
+          },
+          {
+            "when": [
+              "firstperson_lefthand",
+              "firstperson_righthand"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "enderscape:item/fp/e_magnia_attractor"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "enderscape:item/tp/e_magnia_attractor"
+        }
+      }
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "enderscape:item/magnia_attractor"
+      },
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "enderscape:item/magnia_attractor_active"
+      },
+      "property": "enderscape:enabled"
+    }
+  }
+}

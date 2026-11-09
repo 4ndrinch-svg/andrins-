@@ -1,0 +1,8 @@
+{
+  "parent": "mo_waystones:block/15waystone_bottom",
+  "textures": {
+    "emissive": "mo_waystones:block/divine_bricks_waystone_emissive",
+    "particle": "mo_waystones:block/divine_bricks",
+    "texture": "mo_waystones:block/divine_bricks_waystone"
+  }
+}

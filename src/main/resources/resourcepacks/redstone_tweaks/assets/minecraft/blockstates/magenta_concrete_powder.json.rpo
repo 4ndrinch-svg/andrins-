@@ -1,0 +1,4 @@
+{
+  "condition": "!outlines.powder",
+  "fallback": "assets/minecraft/blockstates/disabled_features/magenta_concrete_powder.json"
+}

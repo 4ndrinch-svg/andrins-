@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "§b版本§8> §e1.18.2+\n§b作者§8> §2紫芸SaMa",
+    "pack_format": 15,
+    "supported_formats": [
+      15,
+      999
+    ],
+    "min_format": 15,
+    "max_format": 999
+  }
+}
