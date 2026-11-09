@@ -50,6 +50,14 @@ jobs:
           else
             gh release create "v$V" "$JAR" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
           fi
+      - name: find glow api
+        if: always()
+        run: |
+          J=$(find ~/.gradle -name "minecraft-clientonly-deobf-26.3.jar" | head -1)
+          javap -p -cp "$J" net.minecraft.client.Minecraft | grep -iE "glow|outline"
+          javap -p -cp "$J" net.minecraft.client.renderer.entity.EntityRenderer | grep -iE "glow|outline"
+          javap -p -cp "$J" net.minecraft.client.renderer.LevelRenderer | grep -iE "outline|glow|BlockEntit"
+          ls $(dirname $(find ~/.gradle -name "minecraft-clientonly-deobf-26.3.jar" | head -1))
       - name: clear dump branch
         if: always()
         run: |
