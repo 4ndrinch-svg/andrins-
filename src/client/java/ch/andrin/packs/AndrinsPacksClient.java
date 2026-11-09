@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.minecraft.world.entity.EntityTypes;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
@@ -83,6 +84,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 		ClientLifecycleEvents.CLIENT_STARTED.register(PackMemory::restore);
 
 		SpecialModelRenderers.ID_MAPPER.put(Identifier.fromNamespaceAndPath(MOD_ID, "spatula"), SpatulaSpecialRenderer.Unbaked.MAP_CODEC);
+		LevelRenderEvents.END_MAIN.register(ChestEsp::render);
 		EntityRendererRegistry.register(EntityTypes.TRIDENT, SpatulaTridentRenderer::new);
 
 		KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
@@ -96,7 +98,7 @@ public class AndrinsPacksClient implements ClientModInitializer {
 			while (trollKey.consumeClick()) {
 				TrollVision.enabled = !TrollVision.enabled;
 				if (client.player != null) {
-					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler-Sicht §aAN" : "§dSpieler-Sicht §cAUS"));
+					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler- & Kisten-Sicht §aAN" : "§dSpieler- & Kisten-Sicht §cAUS"));
 				}
 			}
 			while (openMenuKey.consumeClick()) {

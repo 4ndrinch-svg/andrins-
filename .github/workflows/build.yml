@@ -50,24 +50,8 @@ jobs:
           else
             gh release create "v$V" "$JAR" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
           fi
-      - name: dump sources
-        if: always()
-        run: |
-          ./gradlew genSources -q || true
-          mkdir -p dump && cd dump
-          for j in $(find ~/.gradle ../.gradle -name "*sources*.jar" -path "*minecraft*" | head -6); do
-            unzip -q -o "$j" 'net/minecraft/client/renderer/RenderPipelines.java' 'net/minecraft/client/renderer/rendertype/RenderType.java' 'net/minecraft/client/renderer/rendertype/RenderSetup.java' 'net/minecraft/client/renderer/ShapeRenderer.java' 'net/minecraft/client/renderer/blockentity/BlockEntityRenderer.java' 'net/minecraft/client/multiplayer/ClientChunkCache.java' 'net/minecraft/world/level/chunk/LevelChunk.java' 'net/minecraft/client/renderer/LevelRenderer.java' 'com/mojang/renderpearl/api/pipeline/RenderPipeline.java' 'com/mojang/renderpearl/api/platform/DepthTestFunction.java' 2>/dev/null || true
-            unzip -l "$j" | grep -iE "DepthTest|renderpearl/api/pipeline/RenderPipeline|rendertype/RenderTypes|RenderStateShard" | head -5
-          done
-          for j in $(find ~/.gradle -name "fabric-rendering-v1*sources*.jar" -o -name "fabric-rendering-v1*.jar" | head -3); do unzip -o -q "$j" 'net/fabricmc/fabric/api/client/rendering/v1/level/*' -d fabric 2>/dev/null; done
-          find . -type f | head -40
-      - name: upload dump
-        if: always()
-        run: |
-          cd dump && git init -q -b dump && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm dump
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump
       - name: clear dump branch
-        if: false
+        if: always()
         run: |
           mkdir empty && cd empty && git init -q -b dump && echo "leer" > README.md && git add -A && git -c user.name=ci -c user.email=ci@noreply commit -qm "leer"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dump
