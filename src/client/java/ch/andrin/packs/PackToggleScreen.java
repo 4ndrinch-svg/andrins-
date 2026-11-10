@@ -104,11 +104,19 @@ public class PackToggleScreen extends Screen {
 
 		// Kategorien
 		String[] cats = AndrinsPacksClient.CATEGORIES;
-		int tabW = 52, gap = 2;
+		int tabW = 64, gap = 2;
 		int tabsX = cx - (cats.length * (tabW + gap) - gap) / 2;
 		for (int i = 0; i < cats.length; i++) {
 			String c = cats[i];
-			Button tab = Button.builder(Component.literal(c.equals(category) ? "§d§l" + c : c), b -> {
+			int total = 0, active = 0;
+			for (String[] p : AndrinsPacksClient.PACKS) {
+				if (!c.equals("Alle") && !c.equals(p[2])) continue;
+				total++;
+				String pid = findId(repo, p[0]);
+				if (pid != null && wanted.contains(pid)) active++;
+			}
+			String tabText = (c.equals(category) ? "§d§l" : "§f") + c + " §7" + active + "/" + total;
+			Button tab = Button.builder(Component.literal(tabText), b -> {
 				category = c;
 				scroll = 0;
 				rebuildWidgets();
@@ -117,7 +125,7 @@ public class PackToggleScreen extends Screen {
 		}
 
 		listTop = 66;
-		listBottom = this.height - 34;
+		listBottom = this.height - 44;
 		filter(repo);
 		scroll = Math.max(0, Math.min(scroll, maxScroll()));
 
@@ -131,7 +139,7 @@ public class PackToggleScreen extends Screen {
 				if (id == null) return;
 				if (wanted.contains(id)) wanted.remove(id); else wanted.add(id);
 				b.setMessage(rowLabel(p));
-			}).bounds(listLeft + ICON + 6, y, LIST_W - ICON - 6, ROW_H - 4).build();
+			}).bounds(listLeft + ICON + 6, y, LIST_W - ICON - 6 - 34, ROW_H - 4).build();
 			row.active = id != null;
 			this.addRenderableWidget(row);
 		}
@@ -139,11 +147,19 @@ public class PackToggleScreen extends Screen {
 		// Fusszeile
 		int by = this.height - 26;
 		this.addRenderableWidget(Button.builder(Component.literal("§aAlle an"), b -> setAll(true))
-				.bounds(cx - 160, by, 75, 20).build());
+				.bounds(cx - 210, by, 60, 20).build());
 		this.addRenderableWidget(Button.builder(Component.literal("§cAlle aus"), b -> setAll(false))
-				.bounds(cx - 80, by, 75, 20).build());
+				.bounds(cx - 148, by, 60, 20).build());
+		this.addRenderableWidget(Button.builder(Component.literal((InfoHud.hudEnabled ? "§a" : "§7") + "HUD"), b -> {
+			InfoHud.hudEnabled = !InfoHud.hudEnabled;
+			rebuildWidgets();
+		}).bounds(cx - 84, by, 50, 20).build());
+		this.addRenderableWidget(Button.builder(Component.literal((TrollVision.enabled ? "§a" : "§7") + "Sicht"), b -> {
+			TrollVision.enabled = !TrollVision.enabled;
+			rebuildWidgets();
+		}).bounds(cx - 32, by, 50, 20).build());
 		this.addRenderableWidget(Button.builder(Component.literal("§lFertig"), b -> this.onClose())
-				.bounds(cx + 5, by, 155, 20).build());
+				.bounds(cx + 22, by, 188, 20).build());
 
 		this.setInitialFocus(search);
 	}
@@ -151,7 +167,7 @@ public class PackToggleScreen extends Screen {
 	private Component rowLabel(String[] p) {
 		if (p[3] == null) return Component.literal("§8" + p[1] + " (fehlt)");
 		boolean on = wanted.contains(p[3]);
-		return Component.literal((on ? "§a● AN   §f" : "§c○ AUS  §7") + p[1] + " §8[" + p[2] + "]");
+		return Component.literal((on ? "§f" : "§7") + p[1]);
 	}
 
 	/** Schaltet alle aktuell angezeigten (gefilterten) Packs. */
@@ -177,6 +193,30 @@ public class PackToggleScreen extends Screen {
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick) {
 		super.extractRenderState(g, mouseX, mouseY, partialTick);
+
+		// Schalter rechts in jeder Zeile + Beschreibung des Packs unter der Maus
+		String hoverDesc = null;
+		for (int i = 0; i < visible.size(); i++) {
+			int y = listTop + i * ROW_H - (int) scroll;
+			if (y < listTop || y + ROW_H - 4 > listBottom) continue;
+			String[] p = visible.get(i);
+			boolean on = p[3] != null && wanted.contains(p[3]);
+			int sx = listLeft + LIST_W - 30, sy = y + 4;
+			g.fill(sx, sy, sx + 26, sy + 12, on ? 0xFF2E8B3A : 0xFF5A2A2A);
+			g.fill(sx + (on ? 14 : 1), sy + 1, sx + (on ? 25 : 12), sy + 11, on ? 0xFFB6FFB0 : 0xFFAAAAAA);
+			if (mouseX >= listLeft && mouseX <= listLeft + LIST_W && mouseY >= y && mouseY < y + ROW_H - 4) {
+				hoverDesc = "§d" + p[1] + " §8[" + p[2] + "]";
+				if (p[3] != null) {
+					var pack = this.minecraft.getResourcePackRepository().getPack(p[3]);
+					if (pack != null) hoverDesc += "  §7" + pack.getDescription().getString().replace("\n", " ");
+				}
+			}
+		}
+		if (hoverDesc != null) {
+			String d = this.font.plainSubstrByWidth(hoverDesc, this.width - 20);
+			g.fill(0, listBottom + 1, this.width, listBottom + 12, 0xC0000000);
+			g.centeredText(this.font, Component.literal(d), this.width / 2, listBottom + 3, 0xFFFFFFFF);
+		}
 
 		g.centeredText(this.font, Component.literal("§d§lAndrins Packs §7(" + wanted.stream().filter(id -> id.contains(AndrinsPacksClient.MOD_ID)).count() + " aktiv)"), this.width / 2, 7, 0xFFFFFFFF);
 
