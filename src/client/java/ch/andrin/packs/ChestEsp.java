@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.entity.TrappedChestBlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 
@@ -145,6 +146,35 @@ public final class ChestEsp {
 		synchronized (pistons) {
 			for (long[] p : pistons) drawMarker(BlockPos.of(p[0]), (int) p[1], cam, poseStack, collector, rt, sx, sy, sz);
 		}
+		synchronized (BaseFinder.bases) {
+			for (int[] b : BaseFinder.bases) drawBase(b, cam, poseStack, collector, rt, sx, sy, sz);
+		}
+	}
+
+	private static void drawBase(int[] b, Vec3 cam, PoseStack poseStack, SubmitNodeCollector collector, RenderType rt,
+			float sx, float sy, float sz) {
+		final int c = 0xFFFF2020;
+		float x = (float) (b[0] * 16 - cam.x), y = (float) (b[3] - 6 - cam.y), z = (float) (b[1] * 16 - cam.z);
+		poseStack.pushPose();
+		poseStack.translate(x, y, z);
+		collector.submitShapeOutline(poseStack, Shapes.create(new AABB(0, 0, 0, 16, 12, 16)), rt, c, 8.0F, false);
+		poseStack.popPose();
+		final float x0 = x, y0 = y, z0 = z, x1 = x + 16, y1 = y + 12, z1 = z + 16;
+		final int fill = 0x30FF2020;
+		collector.submitCustomGeometry(poseStack, fillType(), (pose, buf) -> {
+			float[][] q = {
+					{x0, y0, z0, x1, y0, z0, x1, y0, z1, x0, y0, z1}, {x0, y1, z0, x0, y1, z1, x1, y1, z1, x1, y1, z0},
+					{x0, y0, z0, x0, y1, z0, x1, y1, z0, x1, y0, z0}, {x0, y0, z1, x1, y0, z1, x1, y1, z1, x0, y1, z1},
+					{x0, y0, z0, x0, y0, z1, x0, y1, z1, x0, y1, z0}, {x1, y0, z0, x1, y1, z0, x1, y1, z1, x1, y0, z1}};
+			for (float[] f : q) for (int i = 0; i < 12; i += 3) buf.addVertex(pose, f[i], f[i + 1], f[i + 2]).setColor(fill);
+		});
+		final float tx = x + 8, ty = y + 6, tz = z + 8;
+		final float len = (float) Math.sqrt((tx - sx) * (tx - sx) + (ty - sy) * (ty - sy) + (tz - sz) * (tz - sz));
+		final float nx = (tx - sx) / len, ny = (ty - sy) / len, nz = (tz - sz) / len;
+		collector.submitCustomGeometry(poseStack, rt, (pose, buf) -> {
+			buf.addVertex(pose, sx, sy, sz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(6.0F);
+			buf.addVertex(pose, tx, ty, tz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(6.0F);
+		});
 	}
 
 	private static void drawMarker(BlockPos p, int c, Vec3 cam, PoseStack poseStack, SubmitNodeCollector collector, RenderType rt,

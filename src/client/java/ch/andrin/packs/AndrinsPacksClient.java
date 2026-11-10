@@ -95,11 +95,12 @@ public class AndrinsPacksClient implements ClientModInitializer {
 				new KeyMapping("key.andrinspacks.troll_vision", InputConstants.KEY_G, category));
 
 		ClientTickEvents.END_CLIENT_TICK.register(ChestEsp::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(BaseFinder::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (trollKey.consumeClick()) {
 				TrollVision.enabled = !TrollVision.enabled;
 				if (client.player != null) {
-					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler, Kisten, Trichter & Kolben §aAN" : "§dSpieler, Kisten, Trichter & Kolben §cAUS"));
+					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSicht + Base-Finder §aAN" : "§dSicht + Base-Finder §cAUS"));
 				}
 			}
 			while (openMenuKey.consumeClick()) {
