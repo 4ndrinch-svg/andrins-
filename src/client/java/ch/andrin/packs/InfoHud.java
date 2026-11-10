@@ -51,7 +51,7 @@ public final class InfoHud {
 			if (pc >= 0 && pc <= 10) {
 				if (!warned[i]) {
 					warned[i] = true;
-					mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_BELL, 0.6F, 1.0F));
+					mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_BELL.value(), 0.6F, 1.0F));
 					p.sendOverlayMessage(Component.literal("§c⚠ " + SLOT_NAMES[i] + " fast kaputt! §7(" + pc + " %)"));
 				}
 			} else {
@@ -64,7 +64,7 @@ public final class InfoHud {
 	public static void draw(net.minecraft.client.gui.GuiGraphicsExtractor g) {
 		Minecraft mc = Minecraft.getInstance();
 		Player p = mc.player;
-		if (!hudEnabled || p == null || mc.level == null || mc.options.hideGui) return;
+		if (!hudEnabled || p == null || mc.level == null) return;
 		var font = mc.font;
 		int y = 4;
 		String[] lines = {
