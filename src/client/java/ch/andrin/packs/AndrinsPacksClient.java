@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.world.entity.EntityTypes;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
@@ -68,6 +69,8 @@ public class AndrinsPacksClient implements ClientModInitializer {
 
 	public static KeyMapping openMenuKey;
 	public static KeyMapping trollKey;
+	public static KeyMapping fullbrightKey;
+	public static KeyMapping hudKey;
 
 	@Override
 	public void onInitializeClient() {
@@ -94,6 +97,19 @@ public class AndrinsPacksClient implements ClientModInitializer {
 		trollKey = KeyMappingHelper.registerKeyMapping(
 				new KeyMapping("key.andrinspacks.troll_vision", InputConstants.KEY_G, category));
 
+		fullbrightKey = KeyMappingHelper.registerKeyMapping(
+				new KeyMapping("key.andrinspacks.fullbright", InputConstants.KEY_B, category));
+		hudKey = KeyMappingHelper.registerKeyMapping(
+				new KeyMapping("key.andrinspacks.hud", InputConstants.KEY_H, category));
+		HudElementRegistry.addLast(Identifier.fromNamespaceAndPath(MOD_ID, "info_hud"), (g, delta) -> InfoHud.draw(g));
+		ClientTickEvents.END_CLIENT_TICK.register(InfoHud::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			while (fullbrightKey.consumeClick()) Fullbright.toggle(client);
+			while (hudKey.consumeClick()) {
+				InfoHud.hudEnabled = !InfoHud.hudEnabled;
+				if (client.player != null) client.player.sendOverlayMessage(Component.literal(InfoHud.hudEnabled ? "§dInfo-HUD §aAN" : "§dInfo-HUD §cAUS"));
+			}
+		});
 		ClientTickEvents.END_CLIENT_TICK.register(ChestEsp::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(BaseFinder::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

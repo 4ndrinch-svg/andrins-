@@ -116,9 +116,15 @@ public final class ChestEsp {
 	}
 
 	public static void render(LevelRenderContext ctx) {
-		if (!TrollVision.enabled) return;
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.level == null || mc.player == null) return;
+		if (InfoHud.deathPos != null && mc.level.dimension().toString().equals(InfoHud.deathDim)) {
+			Vec3 c0 = ctx.levelState().cameraRenderState.pos;
+			Vec3 lk = mc.player.getViewVector(1.0F);
+			drawMarker(InfoHud.deathPos, 0xFFFF0000, c0, ctx.poseStack(), ctx.submitNodeCollector(), type(),
+					(float) (lk.x * 0.6), (float) (lk.y * 0.6), (float) (lk.z * 0.6));
+		}
+		if (!TrollVision.enabled) return;
 
 		Vec3 cam = ctx.levelState().cameraRenderState.pos;
 		PoseStack poseStack = ctx.poseStack();
