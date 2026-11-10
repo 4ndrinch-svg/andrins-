@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.PistonBaseBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -85,11 +84,11 @@ public final class ChestEsp {
 				for (int si = 0; si < sections.length; si++) {
 					LevelChunkSection sec = sections[si];
 					if (sec == null || sec.hasOnlyAir()) continue;
-					if (!sec.getStates().maybeHas(st -> st.getBlock() instanceof PistonBaseBlock)) continue;
+					if (!sec.getStates().maybeHas(st -> (st.is(Blocks.PISTON) || st.is(Blocks.STICKY_PISTON)))) continue;
 					int baseY = chunk.getMinY() + si * 16;
 					for (int y = 0; y < 16; y++) for (int z = 0; z < 16; z++) for (int x = 0; x < 16; x++) {
 						BlockState st = sec.getBlockState(x, y, z);
-						if (st.getBlock() instanceof PistonBaseBlock) {
+						if ((st.is(Blocks.PISTON) || st.is(Blocks.STICKY_PISTON))) {
 							int col = st.is(Blocks.STICKY_PISTON) ? 0xFF80FF20 : 0xFF20FF60;
 							found.add(new long[] {BlockPos.asLong(cx * 16 + x, baseY + y, cz * 16 + z), col});
 						}
