@@ -35,6 +35,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           mkdir out && cp build/libs/andrins-packs-*.jar out/ && rm -f out/*-sources.jar
+          python3 tools/make_mrpack.py "$(grep '^version=' gradle.properties | cut -d= -f2)" && cp build/libs/*.mrpack out/
           cd out && git init -q -b release && git add -A
           git -c user.name=ci -c user.email=ci@noreply commit -qm "jar ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" release
@@ -45,10 +46,12 @@ jobs:
         run: |
           V=$(grep '^version=' gradle.properties | cut -d= -f2)
           JAR=$(ls build/libs/andrins-packs-*.jar | grep -v sources)
+          python3 tools/make_mrpack.py "$V"
+          PACK=build/libs/Andrins-Packs-$V.mrpack
           if gh release view "v$V" >/dev/null 2>&1; then
-            gh release upload "v$V" "$JAR" --clobber
+            gh release upload "v$V" "$JAR" "$PACK" --clobber
           else
-            gh release create "v$V" "$JAR" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
+            gh release create "v$V" "$JAR" "$PACK" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
           fi
       - name: clear dump branch
         if: always()
