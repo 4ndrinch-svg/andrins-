@@ -94,11 +94,12 @@ public class AndrinsPacksClient implements ClientModInitializer {
 		trollKey = KeyMappingHelper.registerKeyMapping(
 				new KeyMapping("key.andrinspacks.troll_vision", InputConstants.KEY_G, category));
 
+		ClientTickEvents.END_CLIENT_TICK.register(ChestEsp::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (trollKey.consumeClick()) {
 				TrollVision.enabled = !TrollVision.enabled;
 				if (client.player != null) {
-					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler- & Kisten-Sicht §aAN" : "§dSpieler- & Kisten-Sicht §cAUS"));
+					client.player.sendOverlayMessage(Component.literal(TrollVision.enabled ? "§dSpieler, Kisten, Trichter & Kolben §aAN" : "§dSpieler, Kisten, Trichter & Kolben §cAUS"));
 				}
 			}
 			while (openMenuKey.consumeClick()) {
