@@ -53,6 +53,16 @@ jobs:
           else
             gh release create "v$V" "$JAR" "$PACK" --title "Andrins Packs v$V (MC 26.3)" --notes "Fabric-Mod für Minecraft 26.3 mit 36 schaltbaren Ressourcenpaketen. Benötigt Fabric API. Im Spiel K drücken für das Pack-Menü."
           fi
+      - name: inspect hud api
+        if: always()
+        run: |
+          F=$(find ~/.gradle -name "fabric-rendering-v1-*.jar" | grep -v sources | head -1)
+          unzip -l "$F" | grep -iE "hud" | head
+          for c in $(unzip -l "$F" | grep -oE "net/fabricmc/fabric/api/client/rendering/v1/hud/[A-Za-z$]+\.class" | sed 's/\.class//; s#/#.#g'); do javap -cp "$F" "$c"; done
+          J=$(find ~/.gradle -name "minecraft-clientonly-deobf-26.3.jar" | head -1); C=$(find ~/.gradle -name "minecraft-common-deobf-26.3.jar" | head -1)
+          javap -cp "$J" net.minecraft.client.gui.GuiGraphicsExtractor | grep -E " text\(|centeredText|fill\(|textWithBackdrop"
+          javap -cp "$C" net.minecraft.sounds.SoundEvents | grep -E "NOTE_BLOCK_PLING|NOTE_BLOCK_BELL|EXPERIENCE_ORB"
+          javap -cp "$J" net.minecraft.client.resources.sounds.SimpleSoundInstance | grep forUI
       - name: clear dump branch
         if: always()
         run: |
