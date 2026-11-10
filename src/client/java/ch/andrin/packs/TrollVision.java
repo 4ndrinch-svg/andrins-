@@ -11,7 +11,7 @@ public final class TrollVision {
 	private TrollVision() {}
 
 	public static boolean shouldGlow(Entity entity) {
-		if (!enabled || !(entity instanceof Player)) return false;
+		if (!enabled || !EspSettings.on("players") || !(entity instanceof Player)) return false;
 		Minecraft mc = Minecraft.getInstance();
 		return entity != mc.player;
 	}

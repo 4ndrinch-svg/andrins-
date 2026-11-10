@@ -97,6 +97,11 @@ public class PackToggleScreen extends Screen {
 				b -> this.minecraft.gui.setScreen(new KeyBindsScreen(this, this.minecraft.options)))
 				.bounds(this.width - 105, 4, 100, 18).build());
 
+		// Sicht-Einstellungen (was G anzeigt)
+		this.addRenderableWidget(Button.builder(Component.literal("§dSicht-Liste"),
+				b -> this.minecraft.gui.setScreen(new EspSettingsScreen(this)))
+				.bounds(5, 4, 80, 18).build());
+
 		// Kategorien
 		String[] cats = AndrinsPacksClient.CATEGORIES;
 		int tabW = 52, gap = 2;

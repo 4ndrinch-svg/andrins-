@@ -105,13 +105,13 @@ public final class ChestEsp {
 
 	/** Farbe pro Kistenart (ARGB), 0 = ignorieren. */
 	private static int color(BlockEntity be) {
-		if (be instanceof TrappedChestBlockEntity) return 0xFFFF3030;   // Fallenkiste: rot
-		if (be instanceof ChestBlockEntity) return 0xFFFFB000;          // Kiste: gold
-		if (be instanceof EnderChestBlockEntity) return 0xFFB040FF;     // Endertruhe: lila
-		if (be instanceof ShulkerBoxBlockEntity) return 0xFFFF50D0;     // Shulker: pink
-		if (be instanceof BarrelBlockEntity) return 0xFF40E0FF;         // Fass: türkis
-		if (be instanceof HopperBlockEntity) return 0xFFFFFFFF;         // Trichter: weiss
-		if (be instanceof DispenserBlockEntity) return 0xFFA0A0A0;      // Werfer/Spender: grau
+		if (be instanceof TrappedChestBlockEntity) return EspSettings.on("trapped") ? 0xFFFF3030 : 0;
+		if (be instanceof ChestBlockEntity) return EspSettings.on("chests") ? 0xFFFFB000 : 0;
+		if (be instanceof EnderChestBlockEntity) return EspSettings.on("ender") ? 0xFFB040FF : 0;
+		if (be instanceof ShulkerBoxBlockEntity) return EspSettings.on("shulker") ? 0xFFFF50D0 : 0;
+		if (be instanceof BarrelBlockEntity) return EspSettings.on("barrels") ? 0xFF40E0FF : 0;
+		if (be instanceof HopperBlockEntity) return EspSettings.on("hoppers") ? 0xFFFFFFFF : 0;
+		if (be instanceof DispenserBlockEntity) return EspSettings.on("dispensers") ? 0xFFA0A0A0 : 0;
 		return 0;
 	}
 
@@ -149,10 +149,10 @@ public final class ChestEsp {
 				}
 			}
 		}
-		synchronized (pistons) {
+		if (EspSettings.on("pistons")) synchronized (pistons) {
 			for (long[] p : pistons) drawMarker(BlockPos.of(p[0]), (int) p[1], cam, poseStack, collector, rt, sx, sy, sz);
 		}
-		synchronized (BaseFinder.bases) {
+		if (EspSettings.on("bases")) synchronized (BaseFinder.bases) {
 			for (int[] b : BaseFinder.bases) drawBase(b, cam, poseStack, collector, rt, sx, sy, sz);
 		}
 	}
@@ -167,7 +167,7 @@ public final class ChestEsp {
 		poseStack.popPose();
 		final float x0 = x, y0 = y, z0 = z, x1 = x + 16, y1 = y + 12, z1 = z + 16;
 		final int fill = 0x30FF2020;
-		collector.submitCustomGeometry(poseStack, fillType(), (pose, buf) -> {
+		if (EspSettings.on("fill")) collector.submitCustomGeometry(poseStack, fillType(), (pose, buf) -> {
 			float[][] q = {
 					{x0, y0, z0, x1, y0, z0, x1, y0, z1, x0, y0, z1}, {x0, y1, z0, x0, y1, z1, x1, y1, z1, x1, y1, z0},
 					{x0, y0, z0, x0, y1, z0, x1, y1, z0, x1, y0, z0}, {x0, y0, z1, x1, y0, z1, x1, y1, z1, x0, y1, z1},
@@ -177,7 +177,7 @@ public final class ChestEsp {
 		final float tx = x + 8, ty = y + 6, tz = z + 8;
 		final float len = (float) Math.sqrt((tx - sx) * (tx - sx) + (ty - sy) * (ty - sy) + (tz - sz) * (tz - sz));
 		final float nx = (tx - sx) / len, ny = (ty - sy) / len, nz = (tz - sz) / len;
-		collector.submitCustomGeometry(poseStack, rt, (pose, buf) -> {
+		if (EspSettings.on("tracers")) collector.submitCustomGeometry(poseStack, rt, (pose, buf) -> {
 			buf.addVertex(pose, sx, sy, sz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(6.0F);
 			buf.addVertex(pose, tx, ty, tz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(6.0F);
 		});
@@ -190,7 +190,7 @@ public final class ChestEsp {
 					// gefüllte, halbtransparente Box
 					final int fill = (c & 0x00FFFFFF) | 0x55000000;
 					final float x0 = x - 0.02F, y0 = y - 0.02F, z0 = z - 0.02F, x1 = x + 1.02F, y1 = y + 1.02F, z1 = z + 1.02F;
-					collector.submitCustomGeometry(poseStack, fillType(), (pose, buf) -> {
+					if (EspSettings.on("fill")) collector.submitCustomGeometry(poseStack, fillType(), (pose, buf) -> {
 						float[][] q = {
 								{x0, y0, z0, x1, y0, z0, x1, y0, z1, x0, y0, z1}, {x0, y1, z0, x0, y1, z1, x1, y1, z1, x1, y1, z0},
 								{x0, y0, z0, x0, y1, z0, x1, y1, z0, x1, y0, z0}, {x0, y0, z1, x1, y0, z1, x1, y1, z1, x0, y1, z1},
@@ -208,7 +208,7 @@ public final class ChestEsp {
 					final float tx = x + 0.5F, ty = y + 0.5F, tz = z + 0.5F;
 					final float len = (float) Math.sqrt((tx - sx) * (tx - sx) + (ty - sy) * (ty - sy) + (tz - sz) * (tz - sz));
 					final float nx = (tx - sx) / len, ny = (ty - sy) / len, nz = (tz - sz) / len;
-					collector.submitCustomGeometry(poseStack, rt, (pose, buf) -> {
+					if (EspSettings.on("tracers")) collector.submitCustomGeometry(poseStack, rt, (pose, buf) -> {
 						buf.addVertex(pose, sx, sy, sz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(4.0F);
 						buf.addVertex(pose, tx, ty, tz).setColor(c).setNormal(pose, nx, ny, nz).setLineWidth(4.0F);
 					});
